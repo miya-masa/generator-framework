@@ -16,6 +16,7 @@ import jp.co.myms.generate.core.template.TemplateInfoCreater;
 import jp.co.myms.generate.core.validate.GeneratorParameterValidator;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,13 +25,29 @@ import org.slf4j.LoggerFactory;
  * 
  * @author myms
  * @param <T>
- * @param <T>
- *
  */
 public class GeneratorImpl<T> implements Generator<T> {
 
 	/** ロガー. */
 	private static final Logger LOGGER = LoggerFactory.getLogger(GeneratorImpl.class);
+
+	/** タスク量：入力チェック. */
+	private static final int TASK_VALIDATION = 100;
+
+	/** タスク量：パラメータ解析. */
+	private static final int TASK_PARSE_PARAM = 50;
+
+	/** タスク量：名前計算/. */
+	private static final int TASK_NAME_COMPUTE = 100;
+
+	/** タスク量：テンプレート変数の生成. */
+	private static final int TASK_CREATE_TEMPLATE_INFO = 200;
+
+	/** タスク量：ファイル生成. */
+	private static final int TASK_GENERATE_FILE = 200;
+
+	/** タスク量：総量. */
+	private static final int TASK_TOTAL = TASK_VALIDATION + TASK_PARSE_PARAM + TASK_NAME_COMPUTE + TASK_CREATE_TEMPLATE_INFO + TASK_GENERATE_FILE;
 
 	/** テンプレートファイルと出力ファイル名のマッピング計算クラス. */
 	private NameComputer<T> nameComputer;
@@ -56,37 +73,64 @@ public class GeneratorImpl<T> implements Generator<T> {
 
 	@Override
 	public GeneratorStatus generate(GeneratorParameter<T> parameter) {
+
+		generatorTaskMonitor.startTask("ジェネレートを開始します。", TASK_TOTAL);
 		GeneratorStatus status = new GeneratorStatus();
 		try {
-
 			List<String> errorMessageList = new ArrayList<>();
+			generatorTaskMonitor.subTask("入力チェックをします。");
 			if (!generatorParameterValidator.validate(parameter, errorMessageList)) {
-				status.getValidationErrorMessages().addAll(errorMessageList);
+				status.addValidationErrorMessage(LOGGER, (String[]) errorMessageList.toArray(new String[errorMessageList.size()]));
+				generatorTaskMonitor.end("入力チェックエラーが発生しました.");
 				return status;
 			}
+			generatorTaskMonitor.work(TASK_VALIDATION);
 
+			generatorTaskMonitor.checkCancel();
+			generatorTaskMonitor.subTask("パラメータから値を取得します.");
 			VelocityHelper helper = new VelocityHelper();
 			String templateDirPath = parameter.getTemplateDirectory();
+			status.addInfoMessage(LOGGER, "テンプレートディレクトリパス : " + templateDirPath);
 			String outputDir = parameter.getOutputDirectory();
+			status.addInfoMessage(LOGGER, "出力先 : " + templateDirPath);
 			File templateDir = new File(templateDirPath);
 			if (!templateDir.exists()) {
 				templateDir = new File(this.getClass().getClassLoader().getResource(templateDirPath).toURI());
 			}
-
 			Collection<File> templateFiles = FileUtils.listFiles(templateDir, new String[] { GeneratorConstant.EXTENSION_TEMPLATE }, false);
+			status.addInfoMessage(LOGGER, "テンプレートファイ名: " + StringUtils.join(templateFiles, ','));
+
+			generatorTaskMonitor.work(TASK_PARSE_PARAM);
+
+			generatorTaskMonitor.checkCancel();
+			generatorTaskMonitor.subTask("テンプレートファイルと紐づく名前を取得します。");
 			NameMappings nameMappings = nameComputer.computeOutputFileNames((File[]) templateFiles.toArray(new File[templateFiles.size()]), parameter);
+			generatorTaskMonitor.work(TASK_NAME_COMPUTE);
+
+			generatorTaskMonitor.checkCancel();
+			generatorTaskMonitor.subTask("テンプレートに埋め込む変数情報を取得します。");
 			helper.putAll(templateInfoCreater.create(parameter));
+			generatorTaskMonitor.work(TASK_CREATE_TEMPLATE_INFO);
+
+			generatorTaskMonitor.checkCancel();
+			generatorTaskMonitor.subTask("ファイルを生成します。");
+			int taskAtFile = TASK_GENERATE_FILE / templateFiles.size();
 			for (File file : templateFiles) {
-				helper.merge(templateDirPath + "/" + file.getName(), new File(outputDir, nameMappings.getFileName(file, "none.txt")));
+				generatorTaskMonitor.work(taskAtFile);
+				File outputFile = new File(outputDir, nameMappings.getFileName(file, "none.txt"));
+				status.addInfoMessage(LOGGER, "出力ファイル：" + file.getPath());
+				helper.merge(templateDirPath + "/" + file.getName(), outputFile);
 			}
 
 		} catch (GeneratorException e) {
-			status.getErrorMessages().add(e.getMessage());
+			LOGGER.error("ジェネレータ実行中にエラーが発生しました。", e);
+			status.addErrorMessages(LOGGER, e.getMessage());
 			status.setException(e);
 		} catch (URISyntaxException e) {
-			status.getErrorMessages().add(e.getMessage());
+			LOGGER.error("ジェネレータ実行中にエラーが発生しました。", e);
+			status.addErrorMessages(LOGGER, e.getMessage());
 		}
-
+		generatorTaskMonitor.end("ジェネレートを終了します.");
 		return status;
 
 	}

@@ -7,6 +7,7 @@ import jp.co.myms.generate.core.param.GeneratorParameter;
 /**
  * 出力ファイル名の計算I/F.
  * 
+ * @param <T> テンプレート変数生成パラメータの型
  * @author myms
  */
 public interface NameComputer<T> {

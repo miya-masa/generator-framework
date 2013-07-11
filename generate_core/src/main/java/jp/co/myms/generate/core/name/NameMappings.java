@@ -8,7 +8,7 @@ import java.util.Map;
  * テンプレートファイルと出力先ファイル名のマッピング.
  * 
  * @author myms
- *
+ * 
  */
 public class NameMappings {
 

@@ -25,6 +25,5 @@ public final class GeneratorFactory {
 	 * コンストラクタ.
 	 */
 	private GeneratorFactory() {
-
 	}
 }

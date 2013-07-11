@@ -2,7 +2,7 @@ package jp.co.myms.generate.core.param;
 
 /**
  * @author myms
- *
+ * 
  */
 public interface GeneratorParameter<T> {
 

@@ -21,7 +21,7 @@ import org.junit.Test;
 
 /**
  * @author myms
- *
+ * 
  */
 public class VelocityHelperTest {
 

@@ -7,7 +7,7 @@ import jp.co.myms.generate.core.param.GeneratorParameter;
  * 
  * @param <T> テンプレートパラメータの型
  * @author myms
- *
+ * 
  */
 public interface Generator<T> {
 
@@ -15,6 +15,7 @@ public interface Generator<T> {
 	 * パラメータからファイルを生成する.
 	 * 
 	 * @param parameter ジェネレータパラメータ
+	 * @return ジェネレータステータス
 	 */
 	GeneratorStatus generate(GeneratorParameter<T> parameter);
 }

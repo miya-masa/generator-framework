@@ -4,7 +4,7 @@ package jp.co.myms.generate.core.exception;
  * Velocity例外.
  * 
  * @author myms
- *
+ * 
  */
 public class VelocityRuntimeException extends GeneratorException {
 

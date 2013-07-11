@@ -21,14 +21,14 @@ import org.apache.velocity.app.Velocity;
  * Velocityを利用するためのヘルパークラス.
  * 
  * @author myms
- *
+ * 
  */
 public class VelocityHelper {
 
 	/** 上書き用設定ファイル. */
 	private static final String PRIMARY_VELOCITY_PROPS = "velocity.properties";
 
-	/** デフォルトで使用されるVelocity設定ファイル.*/
+	/** デフォルトで使用されるVelocity設定ファイル. */
 	private static final String DEFAULT_VELOCITY_PROPS = "jp/co/myms/generate/core/velocity.properties";
 
 	/** Velocityコンテキスト. */
