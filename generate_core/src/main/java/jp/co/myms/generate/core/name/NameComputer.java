@@ -16,9 +16,9 @@ public interface NameComputer<T> {
 	 * テンプレートファイルと紐づく出力ファイル名を計算する.
 	 * 
 	 * @param <T>
+	 * @param mappings templateファイルと名前のマッピング
 	 * @param templateFiles テンプレートファイルリスト
 	 * @param parameter ジェネレータパラメータ
-	 * @return マッピング
 	 */
-	NameMappings computeOutputFileNames(File[] templateFiles, GeneratorParameter<T> parameter);
+	void computeOutputFileNames(NameMappings mappings, File[] templateFiles, GeneratorParameter<T> parameter);
 }

@@ -106,7 +106,8 @@ public class GeneratorImpl<T> implements Generator<T> {
 
 			generatorTaskMonitor.checkCancel();
 			generatorTaskMonitor.subTask("テンプレートファイルと紐づく名前を取得します。");
-			NameMappings nameMappings = nameComputer.computeOutputFileNames((File[]) templateFiles.toArray(new File[templateFiles.size()]), parameter);
+			NameMappings nameMappings = new NameMappings();
+			nameComputer.computeOutputFileNames(nameMappings, (File[]) templateFiles.toArray(new File[templateFiles.size()]), parameter);
 			generatorTaskMonitor.work(TASK_NAME_COMPUTE);
 
 			generatorTaskMonitor.checkCancel();

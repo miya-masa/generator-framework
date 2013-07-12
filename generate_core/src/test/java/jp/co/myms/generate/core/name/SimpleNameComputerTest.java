@@ -39,7 +39,8 @@ public class SimpleNameComputerTest {
 		List<File> templateFiles = new ArrayList<>();
 		templateFiles.add(new File("output.vm"));
 		templateFiles.add(new File("output2.vm"));
-		NameMappings actual = target.computeOutputFileNames((File[]) templateFiles.toArray(new File[templateFiles.size()]), new StringGeneratorParameter());
+		NameMappings actual = new NameMappings();
+		target.computeOutputFileNames(actual, (File[]) templateFiles.toArray(new File[templateFiles.size()]), new StringGeneratorParameter());
 		assertThat(actual.getFileName(templateFiles.get(0)), is("output.txt"));
 		assertThat(actual.getFileName(templateFiles.get(1)), is("output2.txt"));
 
