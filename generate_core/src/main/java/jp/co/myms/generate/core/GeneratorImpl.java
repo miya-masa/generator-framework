@@ -14,6 +14,7 @@ import jp.co.myms.generate.core.name.NameMappings;
 import jp.co.myms.generate.core.param.GeneratorParameter;
 import jp.co.myms.generate.core.task.GeneratorTaskMonitor;
 import jp.co.myms.generate.core.template.TemplateInfoCreater;
+import jp.co.myms.generate.core.template.VariableMap;
 import jp.co.myms.generate.core.validate.GeneratorParameterValidator;
 
 import org.apache.commons.io.FileUtils;
@@ -110,7 +111,9 @@ public class GeneratorImpl<T> implements Generator<T> {
 
 			generatorTaskMonitor.checkCancel();
 			generatorTaskMonitor.subTask("テンプレートに埋め込む変数情報を取得します。");
-			helper.putAll(templateInfoCreater.create(parameter));
+			VariableMap variableMap = new VariableMap();
+			templateInfoCreater.setUpVariableMap(variableMap, parameter);
+			helper.putAll(variableMap);
 			generatorTaskMonitor.work(TASK_CREATE_TEMPLATE_INFO);
 
 			generatorTaskMonitor.checkCancel();

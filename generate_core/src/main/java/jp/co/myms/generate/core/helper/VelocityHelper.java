@@ -7,11 +7,11 @@ import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.nio.charset.Charset;
-import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
 
 import jp.co.myms.generate.core.exception.VelocityRuntimeException;
+import jp.co.myms.generate.core.template.VariableMap;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.velocity.Template;
@@ -148,10 +148,10 @@ public class VelocityHelper {
 	/**
 	 * 全て属性を追加する.
 	 * 
-	 * @param keyValueMap キーバリューMap
+	 * @param variableMap 変数マップ
 	 */
-	public void putAll(Map<String, Object> keyValueMap) {
-		for (Entry<String, Object> entry : keyValueMap.entrySet()) {
+	public void putAll(VariableMap variableMap) {
+		for (Entry<String, Object> entry : variableMap.entrySet()) {
 			put(entry.getKey(), entry.getValue());
 		}
 	}

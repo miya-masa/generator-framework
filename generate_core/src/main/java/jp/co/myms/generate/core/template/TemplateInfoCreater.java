@@ -1,7 +1,5 @@
 package jp.co.myms.generate.core.template;
 
-import java.util.Map;
-
 import jp.co.myms.generate.core.param.GeneratorParameter;
 
 /**
@@ -13,11 +11,11 @@ import jp.co.myms.generate.core.param.GeneratorParameter;
 public interface TemplateInfoCreater<T> {
 
 	/**
-	 * ファイル生成情報を作成する.
+	 * テンプレート変数情報をセットする.
 	 * 
+	 * @param map 変数Map
 	 * @param parameter パラメータ
-	 * @return ファイル生成情報
 	 */
-	Map<String, Object> create(GeneratorParameter<T> parameter);
+	void setUpVariableMap(VariableMap map, GeneratorParameter<T> parameter);
 
 }
