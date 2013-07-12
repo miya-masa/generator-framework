@@ -79,7 +79,7 @@ public class GeneratorTest {
 		Generator<String> generator = GeneratorFactory.createGenerator(module);
 		StringGeneratorParameter parameter = new StringGeneratorParameter();
 		parameter.setOutputDirectory("output");
-		parameter.setTemplateDirectory("file_system");
+		parameter.setTemplateDirectory("src/test/resources/template");
 		parameter.setTemplateParameter("テストテストテストテストテスト");
 		generator.generate(parameter);
 		File actual = new File("output/template_utf_8.txt");
