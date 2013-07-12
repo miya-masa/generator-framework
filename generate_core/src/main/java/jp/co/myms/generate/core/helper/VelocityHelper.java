@@ -1,11 +1,12 @@
 package jp.co.myms.generate.core.helper;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.nio.charset.Charset;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
@@ -16,6 +17,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
+import org.apache.velocity.runtime.RuntimeConstants;
 
 /**
  * Velocityを利用するためのヘルパークラス.
@@ -30,6 +32,9 @@ public class VelocityHelper {
 
 	/** デフォルトで使用されるVelocity設定ファイル. */
 	private static final String DEFAULT_VELOCITY_PROPS = "jp/co/myms/generate/core/velocity.properties";
+
+	/** 出力エンコーディング. */
+	private static final Charset OUTPUT_ENCODING;
 
 	/** Velocityコンテキスト. */
 	private final VelocityContext velocityContext;
@@ -60,6 +65,7 @@ public class VelocityHelper {
 			targetProps = defaultProps;
 		}
 		Velocity.init(targetProps);
+		OUTPUT_ENCODING = Charset.forName((String) Velocity.getProperty(RuntimeConstants.OUTPUT_ENCODING));
 	}
 
 	/**
@@ -95,7 +101,7 @@ public class VelocityHelper {
 	 * @param outputPath 出力先ファイルパス
 	 */
 	public void merge(String templatePath, String outputPath) {
-		try (Writer writer = new BufferedWriter(new FileWriter(new File(outputPath)))) {
+		try (Writer writer = new OutputStreamWriter(new FileOutputStream(new File(outputPath)), OUTPUT_ENCODING)) {
 			merge(templatePath, writer);
 		} catch (IOException e) {
 			throw new VelocityRuntimeException("Velocityのマージ中に例外が発生しました。", e);
@@ -110,7 +116,7 @@ public class VelocityHelper {
 	 */
 	public void merge(String templatePath, File outputFile) {
 
-		try (Writer writer = new BufferedWriter(new FileWriter(outputFile))) {
+		try (Writer writer = new OutputStreamWriter(new FileOutputStream(outputFile), OUTPUT_ENCODING)) {
 			merge(templatePath, writer);
 		} catch (IOException e) {
 			throw new VelocityRuntimeException("Velocityのマージ中に例外が発生しました。", e);

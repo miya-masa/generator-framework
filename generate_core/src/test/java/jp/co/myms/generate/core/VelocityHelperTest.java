@@ -61,7 +61,7 @@ public class VelocityHelperTest {
 		target.put("key0", "value0");
 		target.put("key1", "value1");
 		target.put("key2", "value2");
-		target.merge("template/template.vm", "output/output.txt");
+		target.merge("template/template_utf_8.vm", "output/output.txt");
 		File actual = new File("output/output.txt");
 		assertThat(actual.exists(), is(true));
 		List<String> lines = FileUtils.readLines(actual);

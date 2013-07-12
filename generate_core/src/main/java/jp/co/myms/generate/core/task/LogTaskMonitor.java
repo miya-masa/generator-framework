@@ -17,12 +17,12 @@ public class LogTaskMonitor implements GeneratorTaskMonitor {
 	/** 総タスク量. */
 	private Integer totalTask;
 	/** 残タスク. */
-	private Integer amountTask;
+	private Integer done;
 
 	@Override
 	public void startTask(String taskName, int totalTask) {
 		this.totalTask = totalTask;
-		this.amountTask = this.totalTask;
+		this.done = 0;
 		LOGGER.info("タスクを開始します。タスク名：{} 総タスク量：{}", taskName, totalTask);
 	}
 
@@ -33,20 +33,20 @@ public class LogTaskMonitor implements GeneratorTaskMonitor {
 
 	@Override
 	public void work(int work) {
-		this.amountTask -= work;
-		LOGGER.info("タスクを進めます。進捗:{}", this.amountTask / this.totalTask);
+		this.done += work;
+		LOGGER.info("タスクを進めます。進捗:{}{}", this.done * 100 / this.totalTask, "%");
 	}
 
 	@Override
 	public void end(String message) {
 		this.totalTask = null;
-		this.amountTask = null;
+		this.done = null;
 		LOGGER.info("タスクを終了します。{}", message);
 	}
 
 	@Override
 	public boolean isRunning() {
-		return this.totalTask != null && this.amountTask != null;
+		return this.totalTask != null && this.done != null;
 	}
 
 	@Override

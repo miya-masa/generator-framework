@@ -8,6 +8,7 @@ import java.util.List;
 
 import jp.co.myms.generate.core.exception.GeneratorException;
 import jp.co.myms.generate.core.helper.VelocityHelper;
+import jp.co.myms.generate.core.module.GeneratorModule;
 import jp.co.myms.generate.core.name.NameComputer;
 import jp.co.myms.generate.core.name.NameMappings;
 import jp.co.myms.generate.core.param.GeneratorParameter;
@@ -64,7 +65,7 @@ public class GeneratorImpl<T> implements Generator<T> {
 	/**
 	 * @param module モジュール
 	 */
-	public GeneratorImpl(AbstractGeneratorModule<T> module) {
+	public GeneratorImpl(GeneratorModule<T> module) {
 		this.nameComputer = module.getNameComputer();
 		this.templateInfoCreater = module.getTemplateInfoCreater();
 		this.generatorParameterValidator = module.getGeneratorParameterValidator();
@@ -74,9 +75,9 @@ public class GeneratorImpl<T> implements Generator<T> {
 	@Override
 	public GeneratorStatus generate(GeneratorParameter<T> parameter) {
 
-		generatorTaskMonitor.startTask("ジェネレートを開始します。", TASK_TOTAL);
 		GeneratorStatus status = new GeneratorStatus();
 		try {
+			generatorTaskMonitor.startTask("ジェネレートを開始します。", TASK_TOTAL);
 			List<String> errorMessageList = new ArrayList<>();
 			generatorTaskMonitor.subTask("入力チェックをします。");
 			if (!generatorParameterValidator.validate(parameter, errorMessageList)) {
@@ -92,13 +93,13 @@ public class GeneratorImpl<T> implements Generator<T> {
 			String templateDirPath = parameter.getTemplateDirectory();
 			status.addInfoMessage(LOGGER, "テンプレートディレクトリパス : " + templateDirPath);
 			String outputDir = parameter.getOutputDirectory();
-			status.addInfoMessage(LOGGER, "出力先 : " + templateDirPath);
+			status.addInfoMessage(LOGGER, "出力先 : " + outputDir);
 			File templateDir = new File(templateDirPath);
 			if (!templateDir.exists()) {
 				templateDir = new File(this.getClass().getClassLoader().getResource(templateDirPath).toURI());
 			}
 			Collection<File> templateFiles = FileUtils.listFiles(templateDir, new String[] { GeneratorConstant.EXTENSION_TEMPLATE }, false);
-			status.addInfoMessage(LOGGER, "テンプレートファイ名: " + StringUtils.join(templateFiles, ','));
+			status.addInfoMessage(LOGGER, "テンプレートファイル名: " + StringUtils.join(templateFiles, ','));
 
 			generatorTaskMonitor.work(TASK_PARSE_PARAM);
 
@@ -116,10 +117,10 @@ public class GeneratorImpl<T> implements Generator<T> {
 			generatorTaskMonitor.subTask("ファイルを生成します。");
 			int taskAtFile = TASK_GENERATE_FILE / templateFiles.size();
 			for (File file : templateFiles) {
-				generatorTaskMonitor.work(taskAtFile);
 				File outputFile = new File(outputDir, nameMappings.getFileName(file, "none.txt"));
-				status.addInfoMessage(LOGGER, "出力ファイル：" + file.getPath());
+				status.addInfoMessage(LOGGER, "出力ファイル：" + outputFile.getPath());
 				helper.merge(templateDirPath + "/" + file.getName(), outputFile);
+				generatorTaskMonitor.work(taskAtFile);
 			}
 
 		} catch (GeneratorException e) {

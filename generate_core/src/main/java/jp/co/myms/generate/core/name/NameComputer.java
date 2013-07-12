@@ -15,6 +15,7 @@ public interface NameComputer<T> {
 	/**
 	 * テンプレートファイルと紐づく出力ファイル名を計算する.
 	 * 
+	 * @param <T>
 	 * @param templateFiles テンプレートファイルリスト
 	 * @param parameter ジェネレータパラメータ
 	 * @return マッピング

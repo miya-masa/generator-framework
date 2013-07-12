@@ -1,5 +1,7 @@
 package jp.co.myms.generate.core;
 
+import jp.co.myms.generate.core.module.GeneratorModule;
+
 /**
  * ジェネレータのファクトリ.
  * 
@@ -16,7 +18,7 @@ public final class GeneratorFactory {
 	 * @param module モジュール
 	 * @return ジェネレータ
 	 */
-	public static <T> Generator<T> createGenerator(AbstractGeneratorModule<T> module) {
+	public static <T> Generator<T> createGenerator(GeneratorModule<T> module) {
 		Generator<T> generator = new GeneratorImpl<T>(module);
 		return generator;
 	}

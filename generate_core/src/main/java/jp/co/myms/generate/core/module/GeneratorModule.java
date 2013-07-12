@@ -1,46 +1,35 @@
-package jp.co.myms.generate.core;
-
-import java.util.Objects;
+package jp.co.myms.generate.core.module;
 
 import jp.co.myms.generate.core.name.NameComputer;
-import jp.co.myms.generate.core.name.SimpleNameComputer;
 import jp.co.myms.generate.core.task.GeneratorTaskMonitor;
-import jp.co.myms.generate.core.task.LogTaskMonitor;
 import jp.co.myms.generate.core.template.TemplateInfoCreater;
 import jp.co.myms.generate.core.validate.GeneratorParameterValidator;
-import jp.co.myms.generate.core.validate.OKValidator;
 
 /**
- * ジェネレータ実行モジュール.
+ * ジェネレータ実行モジュール.インスタンスの生成は{@link GeneratorModuleBuilder}を利用する.<br>
  * 
  * @param <T> テンプレートパラメータの型
  * @author myms
  */
-public abstract class AbstractGeneratorModule<T> {
+public class GeneratorModule<T> {
 
 	/** 名前計算クラス. */
-	private NameComputer<T> nameComputer = new SimpleNameComputer<T>();
+	private NameComputer<T> nameComputer;
 	/** テンプレートバインド情報 生成クラス. */
-	private TemplateInfoCreater<T> templateInfoCreater;
+	private final TemplateInfoCreater<T> templateInfoCreater;
 	/** パラメータバリデータ. */
-	private GeneratorParameterValidator<T> generatorParameterValidator = new OKValidator<>();
-
+	private GeneratorParameterValidator<T> generatorParameterValidator;
 	/** ジェネレータタスクモニター. */
-	private GeneratorTaskMonitor generatorTaskMonitor = new LogTaskMonitor();
+	private GeneratorTaskMonitor generatorTaskMonitor;
 
 	/**
 	 * コンストラクタ.
-	 */
-	public AbstractGeneratorModule() {
-		configure();
-		Objects.requireNonNull(templateInfoCreater, "templateInfoCreaterはNullにはできません.");
-	}
-
-	/**
-	 * 各モジュールを設定する.
 	 * 
+	 * @param templateInfoCreater テンプレート変数生成クラス
 	 */
-	protected abstract void configure();
+	GeneratorModule(TemplateInfoCreater<T> templateInfoCreater) {
+		this.templateInfoCreater = templateInfoCreater;
+	}
 
 	/**
 	 * 名前計算クラスを取得する.
@@ -56,7 +45,7 @@ public abstract class AbstractGeneratorModule<T> {
 	 * 
 	 * @param nameComputer 名前計算クラス
 	 */
-	protected void setNameComputer(NameComputer<T> nameComputer) {
+	void setNameComputer(NameComputer<T> nameComputer) {
 		this.nameComputer = nameComputer;
 	}
 
@@ -67,15 +56,6 @@ public abstract class AbstractGeneratorModule<T> {
 	 */
 	public TemplateInfoCreater<T> getTemplateInfoCreater() {
 		return templateInfoCreater;
-	}
-
-	/**
-	 * テンプレートバインド情報 生成クラスを設定する.
-	 * 
-	 * @param templateInfoCreater テンプレートバインド情報 生成クラス
-	 */
-	protected void setTemplateInfoCreater(TemplateInfoCreater<T> templateInfoCreater) {
-		this.templateInfoCreater = templateInfoCreater;
 	}
 
 	/**
@@ -92,7 +72,7 @@ public abstract class AbstractGeneratorModule<T> {
 	 * 
 	 * @param generatorParameterValidator パラメータバリデータ
 	 */
-	protected void setGeneratorParameterValidator(GeneratorParameterValidator<T> generatorParameterValidator) {
+	void setGeneratorParameterValidator(GeneratorParameterValidator<T> generatorParameterValidator) {
 		this.generatorParameterValidator = generatorParameterValidator;
 	}
 
@@ -103,5 +83,14 @@ public abstract class AbstractGeneratorModule<T> {
 	 */
 	public GeneratorTaskMonitor getGeneratorTaskMonitor() {
 		return generatorTaskMonitor;
+	}
+
+	/**
+	 * ジェネレータタスクモニターを設定する.
+	 * 
+	 * @param generatorTaskMonitor ジェネレータタスクモニター.
+	 */
+	void setGeneratorTaskMonitor(GeneratorTaskMonitor generatorTaskMonitor) {
+		this.generatorTaskMonitor = generatorTaskMonitor;
 	}
 }

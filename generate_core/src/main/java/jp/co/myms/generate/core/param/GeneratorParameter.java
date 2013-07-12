@@ -1,8 +1,11 @@
 package jp.co.myms.generate.core.param;
 
 /**
- * @author myms
  * 
+ * ジェネレータパラメータ.
+ * 
+ * @param <T> テンプレート変数生成パラメータ
+ * @author myms
  */
 public interface GeneratorParameter<T> {
 
