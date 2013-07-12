@@ -6,6 +6,7 @@ import static org.junit.Assert.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.nio.charset.Charset;
 import java.util.List;
 
 import jp.co.myms.generate.core.exception.GeneratorException;
@@ -65,7 +66,7 @@ public class GeneratorTest {
 		generator.generate(parameter);
 		File actual = new File("output/template_utf_8.txt");
 		assertThat(actual.exists(), is(true));
-		List<String> lines = FileUtils.readLines(actual);
+		List<String> lines = FileUtils.readLines(actual, Charset.forName("UTF-8"));
 		assertThat(lines.size(), is(3));
 		for (String string : lines) {
 			assertThat(string, is("テストテストテストテストテスト"));
@@ -84,7 +85,7 @@ public class GeneratorTest {
 		generator.generate(parameter);
 		File actual = new File("output/template_utf_8.txt");
 		assertThat(actual.exists(), is(true));
-		List<String> lines = FileUtils.readLines(actual);
+		List<String> lines = FileUtils.readLines(actual, Charset.forName("UTF-8"));
 		assertThat(lines.size(), is(3));
 		for (String string : lines) {
 			assertThat(string, is("テストテストテストテストテスト"));

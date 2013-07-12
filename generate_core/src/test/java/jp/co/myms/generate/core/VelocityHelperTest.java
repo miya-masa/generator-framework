@@ -25,12 +25,16 @@ import org.junit.Test;
  */
 public class VelocityHelperTest {
 
+	private static File outputDir = null;
+
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		new File("output").mkdir();
+		outputDir = new File("output");
+		outputDir.mkdir();
+
 	}
 
 	/**
@@ -38,7 +42,7 @@ public class VelocityHelperTest {
 	 */
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
-		new File("output").deleteOnExit();
+		FileUtils.deleteQuietly(outputDir);
 	}
 
 	/**

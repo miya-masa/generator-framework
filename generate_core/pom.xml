@@ -4,6 +4,7 @@
     <groupId>jp.co.myms.generate</groupId>
     <artifactId>generate_parent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <relativePath>../generate_parent</relativePath>
   </parent>
   <artifactId>generate_core</artifactId>
   <name>generate_core</name>

@@ -18,6 +18,8 @@ import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
 import org.apache.velocity.runtime.RuntimeConstants;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Velocityを利用するためのヘルパークラス.
@@ -26,6 +28,9 @@ import org.apache.velocity.runtime.RuntimeConstants;
  * 
  */
 public class VelocityHelper {
+
+	/** ロガー. */
+	private static final Logger LOGGER = LoggerFactory.getLogger(VelocityHelper.class);
 
 	/** 上書き用設定ファイル. */
 	private static final String PRIMARY_VELOCITY_PROPS = "velocity.properties";
@@ -65,6 +70,7 @@ public class VelocityHelper {
 			targetProps = defaultProps;
 		}
 		Velocity.init(targetProps);
+		LOGGER.debug(targetProps.toString());
 		OUTPUT_ENCODING = Charset.forName((String) Velocity.getProperty(RuntimeConstants.OUTPUT_ENCODING));
 	}
 
