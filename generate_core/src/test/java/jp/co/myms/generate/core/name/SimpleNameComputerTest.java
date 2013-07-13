@@ -4,8 +4,6 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.*;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 import jp.co.myms.generate.core.param.StringGeneratorParameter;
 
@@ -36,13 +34,8 @@ public class SimpleNameComputerTest {
 	@Test
 	public void testComputeOutputFileNames() {
 		SimpleNameComputer<String> target = new SimpleNameComputer<>();
-		List<File> templateFiles = new ArrayList<>();
-		templateFiles.add(new File("output.vm"));
-		templateFiles.add(new File("output2.vm"));
-		NameMappings actual = new NameMappings();
-		target.computeOutputFileNames(actual, (File[]) templateFiles.toArray(new File[templateFiles.size()]), new StringGeneratorParameter());
-		assertThat(actual.getFileName(templateFiles.get(0)), is("output.txt"));
-		assertThat(actual.getFileName(templateFiles.get(1)), is("output2.txt"));
+		String actual = target.computeOutputFileNames(new File("output.vm"), new StringGeneratorParameter());
+		assertThat(actual, is("output.txt"));
 
 	}
 }

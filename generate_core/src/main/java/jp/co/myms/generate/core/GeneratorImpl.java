@@ -10,7 +10,6 @@ import jp.co.myms.generate.core.exception.GeneratorException;
 import jp.co.myms.generate.core.helper.VelocityHelper;
 import jp.co.myms.generate.core.module.GeneratorModule;
 import jp.co.myms.generate.core.name.NameComputer;
-import jp.co.myms.generate.core.name.NameMappings;
 import jp.co.myms.generate.core.param.GeneratorParameter;
 import jp.co.myms.generate.core.task.GeneratorTaskMonitor;
 import jp.co.myms.generate.core.template.TemplateInfoCreater;
@@ -39,9 +38,6 @@ public class GeneratorImpl<T> implements Generator<T> {
 	/** タスク量：パラメータ解析. */
 	private static final int TASK_PARSE_PARAM = 50;
 
-	/** タスク量：名前計算/. */
-	private static final int TASK_NAME_COMPUTE = 100;
-
 	/** タスク量：テンプレート変数の生成. */
 	private static final int TASK_CREATE_TEMPLATE_INFO = 200;
 
@@ -49,7 +45,7 @@ public class GeneratorImpl<T> implements Generator<T> {
 	private static final int TASK_GENERATE_FILE = 200;
 
 	/** タスク量：総量. */
-	private static final int TASK_TOTAL = TASK_VALIDATION + TASK_PARSE_PARAM + TASK_NAME_COMPUTE + TASK_CREATE_TEMPLATE_INFO + TASK_GENERATE_FILE;
+	private static final int TASK_TOTAL = TASK_VALIDATION + TASK_PARSE_PARAM + TASK_CREATE_TEMPLATE_INFO + TASK_GENERATE_FILE;
 
 	/** テンプレートファイルと出力ファイル名のマッピング計算クラス. */
 	private NameComputer<T> nameComputer;
@@ -101,14 +97,7 @@ public class GeneratorImpl<T> implements Generator<T> {
 			}
 			Collection<File> templateFiles = FileUtils.listFiles(templateDir, new String[] { GeneratorConstant.EXTENSION_TEMPLATE }, false);
 			status.addInfoMessage(LOGGER, "テンプレートファイル名: " + StringUtils.join(templateFiles, ','));
-
 			generatorTaskMonitor.work(TASK_PARSE_PARAM);
-
-			generatorTaskMonitor.checkCancel();
-			generatorTaskMonitor.subTask("テンプレートファイルと紐づく名前を取得します。");
-			NameMappings nameMappings = new NameMappings();
-			nameComputer.computeOutputFileNames(nameMappings, (File[]) templateFiles.toArray(new File[templateFiles.size()]), parameter);
-			generatorTaskMonitor.work(TASK_NAME_COMPUTE);
 
 			generatorTaskMonitor.checkCancel();
 			generatorTaskMonitor.subTask("テンプレートに埋め込む変数情報を取得します。");
@@ -121,7 +110,7 @@ public class GeneratorImpl<T> implements Generator<T> {
 			generatorTaskMonitor.subTask("ファイルを生成します。");
 			int taskAtFile = TASK_GENERATE_FILE / templateFiles.size();
 			for (File file : templateFiles) {
-				File outputFile = new File(outputDir, nameMappings.getFileName(file, "none.txt"));
+				File outputFile = new File(outputDir, nameComputer.computeOutputFileNames(file, parameter));
 				status.addInfoMessage(LOGGER, "出力ファイル：" + outputFile.getPath());
 				helper.merge(templateDirPath + "/" + file.getName(), outputFile);
 				generatorTaskMonitor.work(taskAtFile);
