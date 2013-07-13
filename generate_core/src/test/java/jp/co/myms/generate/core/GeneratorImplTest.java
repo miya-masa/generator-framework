@@ -25,7 +25,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class GeneratorTest {
+public class GeneratorImplTest {
 
 	private static File outputDir = null;
 
