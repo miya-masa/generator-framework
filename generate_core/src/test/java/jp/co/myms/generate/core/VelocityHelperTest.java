@@ -32,6 +32,7 @@ public class VelocityHelperTest {
 	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+
 		outputDir = new File("output");
 		outputDir.mkdir();
 

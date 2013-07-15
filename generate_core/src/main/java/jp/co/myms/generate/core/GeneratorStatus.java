@@ -70,7 +70,9 @@ public class GeneratorStatus {
 	 */
 	public void addInfoMessage(Logger logger, String... infoMessage) {
 		Objects.requireNonNull(infoMessage);
-		logger.info(StringUtils.join(infoMessage));
+		if (logger != null) {
+			logger.info(StringUtils.join(infoMessage, ","));
+		}
 		Collections.addAll(infoMessages, infoMessage);
 	}
 
@@ -91,7 +93,9 @@ public class GeneratorStatus {
 	 */
 	public void addErrorMessages(Logger logger, String... errorMessage) {
 		Objects.requireNonNull(errorMessage);
-		logger.error(StringUtils.join(errorMessage));
+		if (logger != null) {
+			logger.error(StringUtils.join(errorMessage, ','));
+		}
 		Collections.addAll(errorMessages, errorMessage);
 	}
 
@@ -130,7 +134,9 @@ public class GeneratorStatus {
 	 */
 	public void addValidationErrorMessage(Logger logger, String... validationErrorMessage) {
 		Objects.requireNonNull(validationErrorMessage);
-		logger.info(StringUtils.join(validationErrorMessage));
+		if (logger != null) {
+			logger.info(StringUtils.join(validationErrorMessage));
+		}
 		Collections.addAll(validationErrorMessages, validationErrorMessage);
 	}
 

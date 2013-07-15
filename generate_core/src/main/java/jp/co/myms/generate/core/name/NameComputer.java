@@ -1,8 +1,7 @@
 package jp.co.myms.generate.core.name;
 
-import java.io.File;
-
 import jp.co.myms.generate.core.param.GeneratorParameter;
+import jp.co.myms.generate.core.resource.ResourceWrapper;
 
 /**
  * 出力ファイル名の計算I/F.
@@ -20,5 +19,5 @@ public interface NameComputer<T> {
 	 * @param parameter ジェネレータパラメータ
 	 * @return テンプレートファイルに紐づく出力ファイル名
 	 */
-	String computeOutputFileNames(File templateFile, GeneratorParameter<T> parameter);
+	String computeOutputFileNames(ResourceWrapper templateFile, GeneratorParameter<T> parameter);
 }

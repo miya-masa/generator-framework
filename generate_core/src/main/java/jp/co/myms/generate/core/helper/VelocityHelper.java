@@ -1,16 +1,16 @@
 package jp.co.myms.generate.core.helper;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.nio.charset.Charset;
 import java.util.Map.Entry;
 import java.util.Properties;
 
 import jp.co.myms.generate.core.exception.VelocityRuntimeException;
+import jp.co.myms.generate.core.resource.ResourceWrapper;
+import jp.co.myms.generate.core.resource.ResourceFactory;
+import jp.co.myms.generate.core.resource.ResourcesUtils;
 import jp.co.myms.generate.core.template.VariableMap;
 
 import org.apache.commons.io.IOUtils;
@@ -104,10 +104,10 @@ public class VelocityHelper {
 	 * マージする.
 	 * 
 	 * @param templatePath テンプレートファイルパス
-	 * @param outputPath 出力先ファイルパス
+	 * @param outputFile 出力先ファイルパス
 	 */
-	public void merge(String templatePath, String outputPath) {
-		try (Writer writer = new OutputStreamWriter(new FileOutputStream(new File(outputPath)), OUTPUT_ENCODING)) {
+	public void merge(String templatePath, ResourceWrapper outputFile) {
+		try (Writer writer = outputFile.getWriter(OUTPUT_ENCODING)) {
 			merge(templatePath, writer);
 		} catch (IOException e) {
 			throw new VelocityRuntimeException("Velocityのマージ中に例外が発生しました。", e);
@@ -120,9 +120,9 @@ public class VelocityHelper {
 	 * @param templatePath テンプレートファイル名
 	 * @param outputFile 出力先ファイル
 	 */
-	public void merge(String templatePath, File outputFile) {
-
-		try (Writer writer = new OutputStreamWriter(new FileOutputStream(outputFile), OUTPUT_ENCODING)) {
+	public void merge(String templatePath, String outputFile) {
+		ResourceFactory resourceFactory = ResourcesUtils.getFactory();
+		try (Writer writer = resourceFactory.createResource(outputFile).getWriter(OUTPUT_ENCODING)) {
 			merge(templatePath, writer);
 		} catch (IOException e) {
 			throw new VelocityRuntimeException("Velocityのマージ中に例外が発生しました。", e);

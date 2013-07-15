@@ -1,22 +1,23 @@
 package jp.co.myms.generate.core;
 
-import java.io.File;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 import jp.co.myms.generate.core.exception.GeneratorException;
 import jp.co.myms.generate.core.helper.VelocityHelper;
 import jp.co.myms.generate.core.module.GeneratorModule;
 import jp.co.myms.generate.core.name.NameComputer;
 import jp.co.myms.generate.core.param.GeneratorParameter;
+import jp.co.myms.generate.core.resource.ResourceFactory;
+import jp.co.myms.generate.core.resource.ResourceWrapper;
+import jp.co.myms.generate.core.resource.ResourcesUtils;
 import jp.co.myms.generate.core.task.GeneratorTaskMonitor;
 import jp.co.myms.generate.core.template.TemplateInfoCreater;
 import jp.co.myms.generate.core.template.VariableMap;
 import jp.co.myms.generate.core.validate.GeneratorParameterValidator;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -63,6 +64,7 @@ public class GeneratorImpl<T> implements Generator<T> {
 	 * @param module モジュール
 	 */
 	public GeneratorImpl(GeneratorModule<T> module) {
+		Objects.requireNonNull(module, "ジェネレータモジュールはnullを引数にできません。");
 		this.nameComputer = module.getNameComputer();
 		this.templateInfoCreater = module.getTemplateInfoCreater();
 		this.generatorParameterValidator = module.getGeneratorParameterValidator();
@@ -71,7 +73,7 @@ public class GeneratorImpl<T> implements Generator<T> {
 
 	@Override
 	public GeneratorStatus generate(GeneratorParameter<T> parameter) {
-
+		ResourceFactory factory = ResourcesUtils.getFactory();
 		GeneratorStatus status = new GeneratorStatus();
 		try {
 			generatorTaskMonitor.startTask("ジェネレートを開始します。", TASK_TOTAL);
@@ -91,11 +93,11 @@ public class GeneratorImpl<T> implements Generator<T> {
 			status.addInfoMessage(LOGGER, "テンプレートディレクトリパス : " + templateDirPath);
 			String outputDir = parameter.getOutputDirectory();
 			status.addInfoMessage(LOGGER, "出力先 : " + outputDir);
-			File templateDir = new File(templateDirPath);
+			ResourceWrapper templateDir = factory.createResource(templateDirPath);
 			if (!templateDir.exists()) {
-				templateDir = new File(this.getClass().getClassLoader().getResource(templateDirPath).toURI());
+				templateDir = factory.createResourceFromClasspath(templateDirPath);
 			}
-			Collection<File> templateFiles = FileUtils.listFiles(templateDir, new String[] { GeneratorConstant.EXTENSION_TEMPLATE }, false);
+			Collection<ResourceWrapper> templateFiles = ResourcesUtils.listFiles(templateDir, new String[] { GeneratorConstant.EXTENSION_TEMPLATE }, false);
 			status.addInfoMessage(LOGGER, "テンプレートファイル名: " + StringUtils.join(templateFiles, ','));
 			generatorTaskMonitor.work(TASK_PARSE_PARAM);
 
@@ -109,8 +111,8 @@ public class GeneratorImpl<T> implements Generator<T> {
 			generatorTaskMonitor.checkCancel();
 			generatorTaskMonitor.subTask("ファイルを生成します。");
 			int taskAtFile = TASK_GENERATE_FILE / templateFiles.size();
-			for (File file : templateFiles) {
-				File outputFile = new File(outputDir, nameComputer.computeOutputFileNames(file, parameter));
+			for (ResourceWrapper file : templateFiles) {
+				ResourceWrapper outputFile = factory.createResource(outputDir, nameComputer.computeOutputFileNames(file, parameter));
 				status.addInfoMessage(LOGGER, "出力ファイル：" + outputFile.getPath());
 				helper.merge(templateDirPath + "/" + file.getName(), outputFile);
 				generatorTaskMonitor.work(taskAtFile);
@@ -120,9 +122,6 @@ public class GeneratorImpl<T> implements Generator<T> {
 			LOGGER.error("ジェネレータ実行中にエラーが発生しました。", e);
 			status.addErrorMessages(LOGGER, e.getMessage());
 			status.setException(e);
-		} catch (URISyntaxException e) {
-			LOGGER.error("ジェネレータ実行中にエラーが発生しました。", e);
-			status.addErrorMessages(LOGGER, e.getMessage());
 		}
 		generatorTaskMonitor.end("ジェネレートを終了します.");
 		return status;
