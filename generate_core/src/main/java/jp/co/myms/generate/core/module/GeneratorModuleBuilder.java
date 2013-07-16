@@ -44,7 +44,9 @@ public class GeneratorModuleBuilder<T> {
 	 * @return 自インスタンス
 	 */
 	public GeneratorModuleBuilder<T> setNameComputer(NameComputer<T> nameComputer) {
-		this.nameComputer = nameComputer;
+		if (nameComputer != null) {
+			this.nameComputer = nameComputer;
+		}
 		return this;
 	}
 
@@ -55,7 +57,9 @@ public class GeneratorModuleBuilder<T> {
 	 * @return 自インスタンス
 	 */
 	public GeneratorModuleBuilder<T> setGeneratorParameterValidator(GeneratorParameterValidator<T> generatorParameterValidator) {
-		this.generatorParameterValidator = generatorParameterValidator;
+		if (generatorParameterValidator != null) {
+			this.generatorParameterValidator = generatorParameterValidator;
+		}
 		return this;
 	}
 
@@ -66,7 +70,9 @@ public class GeneratorModuleBuilder<T> {
 	 * @return 自インスタンス
 	 */
 	public GeneratorModuleBuilder<T> setGeneratorTaskMonitor(GeneratorTaskMonitor generatorTaskMonitor) {
-		this.generatorTaskMonitor = generatorTaskMonitor;
+		if (generatorTaskMonitor != null) {
+			this.generatorTaskMonitor = generatorTaskMonitor;
+		}
 		return this;
 	}
 
