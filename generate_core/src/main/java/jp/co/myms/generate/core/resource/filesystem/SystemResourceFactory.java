@@ -8,8 +8,17 @@ import jp.co.myms.generate.core.exception.GeneratorException;
 import jp.co.myms.generate.core.resource.ResourceFactory;
 import jp.co.myms.generate.core.resource.ResourceWrapper;
 
+/**
+ * ファイルシステム用リソースファクトリクラス.
+ * 
+ * @author myms
+ * 
+ */
 public class SystemResourceFactory implements ResourceFactory {
 
+	/* (非 Javadoc)
+	 * @see jp.co.myms.generate.core.resource.ResourceFactory#createResource(java.lang.String)
+	 */
 	@Override
 	public ResourceWrapper createResource(String path) {
 		Objects.requireNonNull(path, "パスはNullにできません。");
@@ -17,6 +26,12 @@ public class SystemResourceFactory implements ResourceFactory {
 
 	}
 
+	/**
+	 * リソースを生成する.
+	 * 
+	 * @param file ファイル実体
+	 * @return リソース
+	 */
 	private ResourceWrapper internalCreateResource(File file) {
 		Objects.requireNonNull(file, "パスはNullにできません。");
 		if (file.isFile()) {
@@ -25,6 +40,9 @@ public class SystemResourceFactory implements ResourceFactory {
 		return new SystemDirectoryWrapper(file);
 	}
 
+	/* (非 Javadoc)
+	 * @see jp.co.myms.generate.core.resource.ResourceFactory#createResourceFromClasspath(java.lang.String)
+	 */
 	@Override
 	public ResourceWrapper createResourceFromClasspath(String path) {
 		try {
@@ -34,6 +52,9 @@ public class SystemResourceFactory implements ResourceFactory {
 		}
 	}
 
+	/* (非 Javadoc)
+	 * @see jp.co.myms.generate.core.resource.ResourceFactory#createResource(java.lang.String, java.lang.String)
+	 */
 	@Override
 	public ResourceWrapper createResource(String outputDir, String fileNames) {
 		return new SystemFileWrapper(new File(outputDir, fileNames));

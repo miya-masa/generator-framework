@@ -8,17 +8,34 @@ import jp.co.myms.generate.core.resource.DirectoryWrapper;
 import jp.co.myms.generate.core.resource.FileWrapper;
 import jp.co.myms.generate.core.resource.ResourceWrapper;
 
+/**
+ * ファイルシステム用ディレクトリラッパークラス.
+ * 
+ * @author myms
+ * 
+ */
 public class SystemDirectoryWrapper extends AbstractSystemResourceWrapper implements DirectoryWrapper {
 
+	/**
+	 * コンストラクタ.
+	 * 
+	 * @param file 実体ファイル
+	 */
 	public SystemDirectoryWrapper(File file) {
 		super(file);
 	}
 
+	/* (非 Javadoc)
+	 * @see jp.co.myms.generate.core.resource.ResourceWrapper#isFile()
+	 */
 	@Override
 	public boolean isFile() {
 		return false;
 	}
 
+	/* (非 Javadoc)
+	 * @see jp.co.myms.generate.core.resource.DirectoryWrapper#listFiles(boolean)
+	 */
 	@Override
 	public FileWrapper[] listFiles(boolean recursive) {
 

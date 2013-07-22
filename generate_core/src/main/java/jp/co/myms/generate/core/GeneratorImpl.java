@@ -73,7 +73,7 @@ public class GeneratorImpl<T> implements Generator<T> {
 
 	@Override
 	public GeneratorStatus generate(GeneratorParameter<T> parameter) {
-		ResourceFactory factory = ResourcesUtils.getFactory();
+		ResourceFactory factory = ResourcesUtils.createFactory();
 		GeneratorStatus status = new GeneratorStatus();
 		try {
 			generatorTaskMonitor.startTask("ジェネレートを開始します。", TASK_TOTAL);

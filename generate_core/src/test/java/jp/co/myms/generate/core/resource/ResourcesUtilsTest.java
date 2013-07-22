@@ -1,16 +1,14 @@
 package jp.co.myms.generate.core.resource;
 
-import jp.co.myms.generate.core.resource.ResourcesUtils.*;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
-import org.junit.Test;
-import mockit.Mocked;
+
+import java.util.Collection;
+
 import mockit.Expectations;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import org.apache.commons.io.FilenameUtils;
+import org.junit.Test;
+
 public class ResourcesUtilsTest {
 
 	@Test
@@ -20,21 +18,16 @@ public class ResourcesUtilsTest {
 	}
 
 	@Test
-	public void instantiation() throws Exception {
-		// TODO JUnit Helper による自動生成
-		ResourcesUtils target = new ResourcesUtils();
-		assertThat(target, notNullValue());
-	}
-
-	@Test
 	public void getFactory_Arg_() throws Exception {
 		// TODO JUnit Helper による自動生成
 		// Arrange
-		new Expectations(){{
-			// 例 : mocked.get(anyString); returns(200);
-		}};
+		new Expectations() {
+			{
+				// 例 : mocked.get(anyString); returns(200);
+			}
+		};
 		// Act
-		ResourceFactory actual = ResourcesUtils.getFactory();
+		ResourceFactory actual = ResourcesUtils.createFactory();
 		// Assert
 		ResourceFactory expected = null;
 		assertThat(actual, is(equalTo(expected)));
@@ -47,9 +40,11 @@ public class ResourcesUtilsTest {
 		ResourceWrapper templateDir = null;
 		String[] strings = new String[] {};
 		boolean b = false;
-		new Expectations(){{
-			// 例 : mocked.get(anyString); returns(200);
-		}};
+		new Expectations() {
+			{
+				// 例 : mocked.get(anyString); returns(200);
+			}
+		};
 		// Act
 		Collection<ResourceWrapper> actual = ResourcesUtils.listFiles(templateDir, strings, b);
 		// Assert
@@ -62,9 +57,11 @@ public class ResourcesUtilsTest {
 		// TODO JUnit Helper による自動生成
 		// Arrange
 		Class resourceFactoryClass = null;
-		new Expectations(){{
-			// 例 : mocked.get(anyString); returns(200);
-		}};
+		new Expectations() {
+			{
+				// 例 : mocked.get(anyString); returns(200);
+			}
+		};
 		// Act
 		ResourcesUtils.setResourceFactoryClass(resourceFactoryClass);
 		// Assert

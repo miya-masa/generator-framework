@@ -39,7 +39,7 @@ public class SimpleNameComputerTest {
 	@Test
 	public void testComputeOutputFileNames() {
 		SimpleNameComputer<String> target = new SimpleNameComputer<>();
-		String actual = target.computeOutputFileNames(ResourcesUtils.getFactory().createResource("output.vm"), new StringGeneratorParameter());
+		String actual = target.computeOutputFileNames(ResourcesUtils.createFactory().createResource("output.vm"), new StringGeneratorParameter());
 		assertThat(actual, is("output.txt"));
 
 	}

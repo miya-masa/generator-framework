@@ -26,7 +26,7 @@ import org.junit.rules.ExpectedException;
 public class VelocityHelperTest {
 
 	private static File outputDir = null;
-	private static ResourceFactory factory = ResourcesUtils.getFactory();
+	private static ResourceFactory factory = ResourcesUtils.createFactory();
 
 	@Rule
 	public ExpectedException thrown = ExpectedException.none();

@@ -121,7 +121,7 @@ public class VelocityHelper {
 	 * @param outputFile 出力先ファイル
 	 */
 	public void merge(String templatePath, String outputFile) {
-		ResourceFactory resourceFactory = ResourcesUtils.getFactory();
+		ResourceFactory resourceFactory = ResourcesUtils.createFactory();
 		try (Writer writer = resourceFactory.createResource(outputFile).getWriter(OUTPUT_ENCODING)) {
 			merge(templatePath, writer);
 		} catch (IOException e) {
