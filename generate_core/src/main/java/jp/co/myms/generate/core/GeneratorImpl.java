@@ -64,7 +64,7 @@ public class GeneratorImpl<T> implements Generator<T> {
 	 * @param module モジュール
 	 */
 	public GeneratorImpl(GeneratorModule<T> module) {
-		Objects.requireNonNull(module, "ジェネレータモジュールはnullを引数にできません。");
+		Objects.requireNonNull(module, "ジェネレータモジュールはnullを引数にできません.");
 		this.nameComputer = module.getNameComputer();
 		this.templateInfoCreater = module.getTemplateInfoCreater();
 		this.generatorParameterValidator = module.getGeneratorParameterValidator();
@@ -76,9 +76,9 @@ public class GeneratorImpl<T> implements Generator<T> {
 		ResourceFactory factory = ResourcesUtils.createFactory();
 		GeneratorStatus status = new GeneratorStatus();
 		try {
-			generatorTaskMonitor.startTask("ジェネレートを開始します。", TASK_TOTAL);
+			generatorTaskMonitor.startTask("ジェネレートを開始します.", TASK_TOTAL);
 			List<String> errorMessageList = new ArrayList<>();
-			generatorTaskMonitor.subTask("入力チェックをします。");
+			generatorTaskMonitor.subTask("入力チェックをします.");
 			if (!generatorParameterValidator.validate(parameter, errorMessageList)) {
 				status.addValidationErrorMessage(LOGGER, (String[]) errorMessageList.toArray(new String[errorMessageList.size()]));
 				generatorTaskMonitor.end("入力チェックエラーが発生しました.");
@@ -102,24 +102,24 @@ public class GeneratorImpl<T> implements Generator<T> {
 			generatorTaskMonitor.work(TASK_PARSE_PARAM);
 
 			generatorTaskMonitor.checkCancel();
-			generatorTaskMonitor.subTask("テンプレートに埋め込む変数情報を取得します。");
+			generatorTaskMonitor.subTask("テンプレートに埋め込む変数情報を取得します.");
 			VariableMap variableMap = new VariableMap();
 			templateInfoCreater.setUpVariableMap(variableMap, parameter);
 			helper.putAll(variableMap);
 			generatorTaskMonitor.work(TASK_CREATE_TEMPLATE_INFO);
 
 			generatorTaskMonitor.checkCancel();
-			generatorTaskMonitor.subTask("ファイルを生成します。");
+			generatorTaskMonitor.subTask("ファイルを生成します.");
 			int taskAtFile = TASK_GENERATE_FILE / templateFiles.size();
 			for (ResourceWrapper file : templateFiles) {
 				ResourceWrapper outputFile = factory.createResource(outputDir, nameComputer.computeOutputFileNames(file, parameter));
-				status.addInfoMessage(LOGGER, "出力ファイル：" + outputFile.getPath());
+				status.addInfoMessage(LOGGER, "出力ファイル" + outputFile.getPath());
 				helper.merge(templateDirPath + "/" + file.getName(), outputFile);
 				generatorTaskMonitor.work(taskAtFile);
 			}
 
 		} catch (GeneratorException e) {
-			LOGGER.error("ジェネレータ実行中にエラーが発生しました。", e);
+			LOGGER.error("ジェネレータ実行中にエラーが発生しました.", e);
 			status.addErrorMessages(LOGGER, e.getMessage());
 			status.setException(e);
 		}

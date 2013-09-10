@@ -21,7 +21,7 @@ public class BaseGeneratorValidator<T> implements GeneratorParameterValidator<T>
 	@Override
 	public boolean validate(GeneratorParameter<T> parameter, List<String> errorMessageList) {
 		int size = errorMessageList.size();
-		if (checkRequired(parameter.getOutputDirectory(), errorMessageList, "出力先ディレクトリが指定されていません。")) {
+		if (checkRequired(parameter.getOutputDirectory(), errorMessageList, "出力先ディレクトリが指定されていません.")) {
 			checkExistFile(parameter.getOutputDirectory(), errorMessageList, "出力先ディレクトリが存在しません", false);
 		}
 		if (checkRequired(parameter.getTemplateDirectory(), errorMessageList, "テンプレートディレクトリが指定されていません")) {

@@ -137,7 +137,7 @@ public class VelocityHelperTest {
 		String templatePath = null;
 		String outputFile = null;
 		thrown.expect(NullPointerException.class);
-		thrown.expectMessage("パスはNullにできません。");
+		thrown.expectMessage("パスはNullにできません.");
 		// Act
 		target.merge(templatePath, outputFile);
 		// Assert

@@ -38,7 +38,7 @@ public class GeneratorFactoryTest {
 		GeneratorFactory.createGenerator(module);
 		// Assert
 		thrown.expect(NullPointerException.class);
-		thrown.expectMessage("ジェネレータモジュールはnullを引数にできません。");
+		thrown.expectMessage("ジェネレータモジュールはnullを引数にできません.");
 	}
 
 }

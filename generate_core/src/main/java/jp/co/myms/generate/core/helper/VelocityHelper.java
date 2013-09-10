@@ -110,7 +110,7 @@ public class VelocityHelper {
 		try (Writer writer = outputFile.getWriter(OUTPUT_ENCODING)) {
 			merge(templatePath, writer);
 		} catch (IOException e) {
-			throw new VelocityRuntimeException("Velocityのマージ中に例外が発生しました。", e);
+			throw new VelocityRuntimeException("Velocityのマージ中に例外が発生しました.", e);
 		}
 	}
 
@@ -125,7 +125,7 @@ public class VelocityHelper {
 		try (Writer writer = resourceFactory.createResource(outputFile).getWriter(OUTPUT_ENCODING)) {
 			merge(templatePath, writer);
 		} catch (IOException e) {
-			throw new VelocityRuntimeException("Velocityのマージ中に例外が発生しました。", e);
+			throw new VelocityRuntimeException("Velocityのマージ中に例外が発生しました.", e);
 		}
 
 	}
@@ -141,7 +141,7 @@ public class VelocityHelper {
 			Template template = Velocity.getTemplate(templatePath);
 			template.merge(velocityContext, writer);
 		} catch (Exception e) {
-			throw new VelocityRuntimeException("Velocityのマージ中に例外が発生しました。", e);
+			throw new VelocityRuntimeException("Velocityのマージ中に例外が発生しました.", e);
 		}
 	}
 

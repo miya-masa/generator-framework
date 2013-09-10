@@ -23,25 +23,25 @@ public class LogTaskMonitor implements GeneratorTaskMonitor {
 	public void startTask(String taskName, int totalTask) {
 		this.totalTask = totalTask;
 		this.done = 0;
-		LOGGER.info("タスクを開始します。タスク名：{} 総タスク量：{}", taskName, totalTask);
+		LOGGER.info("タスクを開始します.タスク名：{} 総タスク量：{}", taskName, totalTask);
 	}
 
 	@Override
 	public void subTask(String subTaskName) {
-		LOGGER.info("サブタスクを開始します。サブタスク名:{}", subTaskName);
+		LOGGER.info("サブタスクを開始します.サブタスク名:{}", subTaskName);
 	}
 
 	@Override
 	public void work(int work) {
 		this.done += work;
-		LOGGER.info("タスクを進めます。進捗:{}{}", this.done * 100 / this.totalTask, "%");
+		LOGGER.info("タスクを進めます.進捗:{}{}", this.done * 100 / this.totalTask, "%");
 	}
 
 	@Override
 	public void end(String message) {
 		this.totalTask = null;
 		this.done = null;
-		LOGGER.info("タスクを終了します。{}", message);
+		LOGGER.info("タスクを終了します.{}", message);
 	}
 
 	@Override

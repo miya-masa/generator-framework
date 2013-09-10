@@ -7,6 +7,9 @@ package jp.co.myms.generate.core.exception;
  */
 public class GeneratorException extends RuntimeException {
 
+	/** */
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * コンストラクタ.
 	 */

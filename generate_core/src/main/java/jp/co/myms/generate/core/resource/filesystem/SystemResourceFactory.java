@@ -21,7 +21,7 @@ public class SystemResourceFactory implements ResourceFactory {
 	 */
 	@Override
 	public ResourceWrapper createResource(String path) {
-		Objects.requireNonNull(path, "パスはNullにできません。");
+		Objects.requireNonNull(path, "パスはNullにできません.");
 		return internalCreateResource(new File(path));
 
 	}
@@ -33,7 +33,7 @@ public class SystemResourceFactory implements ResourceFactory {
 	 * @return リソース
 	 */
 	private ResourceWrapper internalCreateResource(File file) {
-		Objects.requireNonNull(file, "パスはNullにできません。");
+		Objects.requireNonNull(file, "パスはNullにできません.");
 		if (file.isFile()) {
 			return new SystemFileWrapper(file);
 		}

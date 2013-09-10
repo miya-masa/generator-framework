@@ -1,23 +1,5 @@
 package jp.co.myms.generate.core;
 
-import mockit.Expectations;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import jp.co.myms.generate.core.helper.VelocityHelper;
-import jp.co.myms.generate.core.name.NameComputer;
-import jp.co.myms.generate.core.param.GeneratorParameter;
-import jp.co.myms.generate.core.resource.ResourceFactory;
-import jp.co.myms.generate.core.resource.ResourceWrapper;
-import jp.co.myms.generate.core.resource.ResourcesUtils;
-import jp.co.myms.generate.core.template.TemplateInfoCreater;
-import jp.co.myms.generate.core.template.VariableMap;
-import jp.co.myms.generate.core.validate.GeneratorParameterValidator;
-import org.apache.commons.lang.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import jp.co.myms.generate.core.GeneratorImpl.*;
-
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
@@ -30,8 +12,10 @@ import jp.co.myms.generate.core.exception.GeneratorException;
 import jp.co.myms.generate.core.mock.MockTemplateInfoCreater;
 import jp.co.myms.generate.core.module.GeneratorModule;
 import jp.co.myms.generate.core.module.GeneratorModuleBuilder;
+import jp.co.myms.generate.core.param.GeneratorParameter;
 import jp.co.myms.generate.core.param.StringGeneratorParameter;
 import jp.co.myms.generate.core.task.GeneratorTaskMonitor;
+import mockit.Expectations;
 import mockit.Mocked;
 import mockit.NonStrictExpectations;
 
@@ -216,9 +200,11 @@ public class GeneratorImplTest {
 		GeneratorModule<Object> module = null;
 		GeneratorImpl target = new GeneratorImpl(module);
 		GeneratorParameter<Object> parameter = null;
-		new Expectations(){{
-			// 例 : mocked.get(anyString); returns(200);
-		}};
+		new Expectations() {
+			{
+				// 例 : mocked.get(anyString); returns(200);
+			}
+		};
 		// Act
 		GeneratorStatus actual = target.generate(parameter);
 		// Assert
@@ -233,9 +219,11 @@ public class GeneratorImplTest {
 		GeneratorModule<Object> module = null;
 		GeneratorImpl target = new GeneratorImpl(module);
 		GeneratorParameter<Object> parameter = null;
-		new Expectations(){{
-			// 例 : mocked.get(anyString); returns(200);
-		}};
+		new Expectations() {
+			{
+				// 例 : mocked.get(anyString); returns(200);
+			}
+		};
 		// Act
 		GeneratorStatus actual = target.generate(parameter);
 		// Assert

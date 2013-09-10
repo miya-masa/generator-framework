@@ -8,6 +8,9 @@ package jp.co.myms.generate.core.exception;
  */
 public class VelocityRuntimeException extends GeneratorException {
 
+	/** */
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * コンストラクタ.
 	 * 
