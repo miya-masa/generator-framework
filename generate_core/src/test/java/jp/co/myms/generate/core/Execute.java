@@ -22,6 +22,5 @@ public class Execute {
 		parameter.setTemplateDirectory("template");
 		GeneratorStatus status = generator.generate(parameter);
 		System.out.println(StringUtils.join(status.getInfoMessages(), "\r\n"));
-
 	}
 }
