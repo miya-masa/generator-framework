@@ -7,7 +7,7 @@ import java.util.Objects;
 
 import jp.co.myms.generate.core.exception.GeneratorException;
 import jp.co.myms.generate.core.helper.VelocityHelper;
-import jp.co.myms.generate.core.module.GeneratorModule;
+import jp.co.myms.generate.core.module.BaseGeneratorModule;
 import jp.co.myms.generate.core.name.NameComputer;
 import jp.co.myms.generate.core.param.GeneratorParameter;
 import jp.co.myms.generate.core.resource.ResourceFactory;
@@ -63,7 +63,7 @@ public class GeneratorImpl<T> implements Generator<T> {
 	/**
 	 * @param module モジュール
 	 */
-	public GeneratorImpl(GeneratorModule<T> module) {
+	public GeneratorImpl(BaseGeneratorModule<T> module) {
 		Objects.requireNonNull(module, "ジェネレータモジュールはnullを引数にできません.");
 		this.nameComputer = module.getNameComputer();
 		this.templateInfoCreater = module.getTemplateInfoCreater();

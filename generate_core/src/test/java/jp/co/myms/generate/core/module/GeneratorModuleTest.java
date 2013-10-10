@@ -1,6 +1,6 @@
 package jp.co.myms.generate.core.module;
 
-import jp.co.myms.generate.core.module.GeneratorModule.*;
+import jp.co.myms.generate.core.module.BaseGeneratorModule.*;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 import org.junit.Test;
@@ -16,14 +16,14 @@ public class GeneratorModuleTest {
 	@Test
 	public void type() throws Exception {
 		// TODO JUnit Helper による自動生成
-		assertThat(GeneratorModule.class, notNullValue());
+		assertThat(BaseGeneratorModule.class, notNullValue());
 	}
 
 	@Test
 	public void instantiation() throws Exception {
 		// TODO JUnit Helper による自動生成
 		TemplateInfoCreater<Object> templateInfoCreater = null;
-		GeneratorModule target = new GeneratorModule(templateInfoCreater);
+		BaseGeneratorModule target = new BaseGeneratorModule(templateInfoCreater);
 		assertThat(target, notNullValue());
 	}
 
@@ -32,7 +32,7 @@ public class GeneratorModuleTest {
 		// TODO JUnit Helper による自動生成
 		// Arrange
 		TemplateInfoCreater<Object> templateInfoCreater = null;
-		GeneratorModule target = new GeneratorModule(templateInfoCreater);
+		BaseGeneratorModule target = new BaseGeneratorModule(templateInfoCreater);
 		new Expectations(){{
 			// 例 : mocked.get(anyString); returns(200);
 		}};
@@ -48,7 +48,7 @@ public class GeneratorModuleTest {
 		// TODO JUnit Helper による自動生成
 		// Arrange
 		TemplateInfoCreater<Object> templateInfoCreater = null;
-		GeneratorModule target = new GeneratorModule(templateInfoCreater);
+		BaseGeneratorModule target = new BaseGeneratorModule(templateInfoCreater);
 		NameComputer<Object> nameComputer = null;
 		new Expectations(){{
 			// 例 : mocked.get(anyString); returns(200);
@@ -63,7 +63,7 @@ public class GeneratorModuleTest {
 		// TODO JUnit Helper による自動生成
 		// Arrange
 		TemplateInfoCreater<Object> templateInfoCreater = null;
-		GeneratorModule target = new GeneratorModule(templateInfoCreater);
+		BaseGeneratorModule target = new BaseGeneratorModule(templateInfoCreater);
 		new Expectations(){{
 			// 例 : mocked.get(anyString); returns(200);
 		}};
@@ -79,7 +79,7 @@ public class GeneratorModuleTest {
 		// TODO JUnit Helper による自動生成
 		// Arrange
 		TemplateInfoCreater<Object> templateInfoCreater = null;
-		GeneratorModule target = new GeneratorModule(templateInfoCreater);
+		BaseGeneratorModule target = new BaseGeneratorModule(templateInfoCreater);
 		new Expectations(){{
 			// 例 : mocked.get(anyString); returns(200);
 		}};
@@ -95,7 +95,7 @@ public class GeneratorModuleTest {
 		// TODO JUnit Helper による自動生成
 		// Arrange
 		TemplateInfoCreater<Object> templateInfoCreater = null;
-		GeneratorModule target = new GeneratorModule(templateInfoCreater);
+		BaseGeneratorModule target = new BaseGeneratorModule(templateInfoCreater);
 		GeneratorParameterValidator<Object> generatorParameterValidator = null;
 		new Expectations(){{
 			// 例 : mocked.get(anyString); returns(200);

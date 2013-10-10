@@ -3,8 +3,7 @@ package jp.co.myms.generate.core;
 import java.io.File;
 
 import jp.co.myms.generate.core.mock.MockTemplateInfoCreater;
-import jp.co.myms.generate.core.module.GeneratorModule;
-import jp.co.myms.generate.core.module.GeneratorModuleBuilder;
+import jp.co.myms.generate.core.module.BaseGeneratorModule;
 import jp.co.myms.generate.core.param.StringGeneratorParameter;
 
 import org.apache.commons.lang.StringUtils;
@@ -12,7 +11,7 @@ import org.apache.commons.lang.StringUtils;
 public class Execute {
 
 	public static void main(String[] args) {
-		GeneratorModule<String> module = new GeneratorModuleBuilder<>(new MockTemplateInfoCreater()).build();
+		BaseGeneratorModule<String> module = new BaseGeneratorModule<>(new MockTemplateInfoCreater());
 		Generator<String> generator = GeneratorFactory.createGenerator(module);
 		StringGeneratorParameter parameter = new StringGeneratorParameter();
 		parameter.setTemplateParameter("テストテストテスト");

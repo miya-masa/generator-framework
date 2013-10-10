@@ -15,6 +15,13 @@ public class StringGeneratorParameter implements GeneratorParameter<String> {
 	/** テンプレートパラメータ. */
 	private String templateParameter;
 
+	public StringGeneratorParameter() {
+	}
+
+	public StringGeneratorParameter(String templateParameter) {
+		this.templateParameter = templateParameter;
+	}
+
 	/**
 	 * 出力先を取得する.
 	 * 

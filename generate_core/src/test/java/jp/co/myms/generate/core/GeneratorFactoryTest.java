@@ -3,8 +3,7 @@ package jp.co.myms.generate.core;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 import jp.co.myms.generate.core.mock.MockTemplateInfoCreater;
-import jp.co.myms.generate.core.module.GeneratorModule;
-import jp.co.myms.generate.core.module.GeneratorModuleBuilder;
+import jp.co.myms.generate.core.module.BaseGeneratorModule;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -23,7 +22,7 @@ public class GeneratorFactoryTest {
 	@Test
 	public void createGenerator_Arg_GeneratorModule() throws Exception {
 		// Arrange
-		GeneratorModule<String> module = new GeneratorModuleBuilder<>(new MockTemplateInfoCreater()).build();
+		BaseGeneratorModule<String> module = new BaseGeneratorModule(new MockTemplateInfoCreater());
 		// Act
 		Generator<String> actual = GeneratorFactory.createGenerator(module);
 		// Assert
@@ -33,7 +32,7 @@ public class GeneratorFactoryTest {
 	@Test
 	public void createGenerator_Arg_GeneratorModule_nullArg() throws Exception {
 		// Arrange
-		GeneratorModule<Object> module = null;
+		BaseGeneratorModule<Object> module = null;
 		// Act
 		GeneratorFactory.createGenerator(module);
 		// Assert
