@@ -1,0 +1,209 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN">
+<html lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=euc-jp">
+  <title>NMO-CMS</title>
+
+  <link rel="stylesheet" href="/main.css" type="text/css" />
+  <link rel="shortcut icon" href="/images/favicon.ico" />
+  <!-- <link href="/css/nm0704_hotnews_dr.css" rel="stylesheet" media="screen" /> -->
+  <!-- <link href="/css/nm0704_print.css" rel="stylesheet" media="print" /> -->
+  <!-- <link rel="stylesheet" href="/css/nm0804/screen.css" type="text/css" media="screen, projection" /> -->
+  <link rel="stylesheet" type="text/css" href="/css/nm1004/import.css" media="screen, print" />
+  <style type="text/css" media="all">
+<!--
+#gnav {
+	width: 100%;
+	background-image: url("/images/global_nav_medi_bg.gif");
+	background-repeat: repeat-x;
+}
+-->
+</style>
+
+
+
+
+
+
+  <script type="text/javascript" src="/js/nmo-related_medicine_search.js" charset=x-sjis />
+  </script>
+</head>
+<!-- head menu -->
+<body id="mode_admin">
+  <!-- header -->
+  <div id="top-navigater">
+    <div class="topnav-img">
+      <h1>
+        <img alt="NMO-CMS" src="/images/NMO-CMS-LOGO.gif" width="387" height="80" border="0" />
+      </h1>
+    </div>
+    <div id="topnav-links">
+      <div class="rightcol">
+        アカウント: 宮内 壯之 | <a href="/do_logout">ログアウト</a>
+      </div>
+    </div>
+  </div>
+
+  <div id="side-nav">
+    <ul class="top-menu">
+
+      <li>編集者メニュー
+        <ul class="creator-menu">
+          <li><a href="/new_page">新規コンテンツ作成</a></li>
+          <li><a href="/leaf_copy">記事のコピー</a></li>
+          <li><a href="/recieve_correct_list">修正中／修正指示受け一覧</a></li>
+          <li><a href="/test_view">仮登録中一覧</a></li>
+          <li><a href="/publish_confirm">承認待ち一覧</a></li>
+          <li><a href="/publish_list_c">公開済み一覧</a></li>
+        </ul>
+      </li>
+
+
+      <li>承認者メニュー
+        <ul class="creator-menu">
+          <li><a href="/approve_req_view">承認依頼受け一覧</a></li>
+          <li><a href="/send_correct_list">修正指示発行済み一覧</a></li>
+          <li><a href="/wait_publish">公開操作待ち一覧</a></li>
+          <li><a href="/reserved">予約済み一覧</a></li>
+          <li><a href="/publish_list">公開済み一覧</a></li>
+        </ul>
+      </li>
+
+
+      <li>管理者メニュー
+        <ul class="creator-menu">
+          <li><a href="/template">テンプレート管理機能</a></li>
+        </ul>
+      </li>
+
+    </ul>
+  </div>
+
+  <div id="center-cont">
+    &nbsp; カテゴリー選択 &nbsp; -> &nbsp; 入力 &nbsp; -> &nbsp; <font class="base_status">確認</font> &nbsp; -> &nbsp; 完了
+
+    <h3 id="func_title">プレビュー確認</h3>
+    <div id="description">
+      入力した内容でプレビューします。内容の誤りやデザインの崩れ等がなければ、「仮登録を行う」ボタンを押してください。コンテンツDBへの登録とテストページをステージングサーバに出力します。<br>修正の必要がある場合は「修正する」ボタンを押してください。 
+    </div>
+    <hr size="1" noshade>
+      <div id="main_form">
+        <div id="page_attr_block">
+          <div id="perusal">閲覧先： 好評連載 - 「実践！内科メンテナンス外来」</div>
+          <div id="auth">認証段階： オープン</div>
+          <div id="attribute">カテゴリー： その他 - その他</div>
+
+
+
+        </div>
+        <form action="/new_page/input_form" method="post">
+          <div id="button">
+            <input type="submit" value="前の画面に戻る" name="do_correct">
+          </div>
+        </form>
+        <hr size="1" noshade>
+          <!-- プレビューデータ挿入 -->
+          <!-- ARTICLE -->
+          <div class="article">
+
+            <!--  -->
+            <div class="article-page-header">
+              <a href="/inc/all/
+" title="記事一覧" class="button right"><span>記事一覧</span></a>
+              <h2></h2>
+            </div>
+            <div class="article">
+              <div class="article-header">
+                <!--/billboard-->
+                <h1>
+                  <span class="heading">テスト 宮内 拡大画像チェック</span>
+                </h1>
+                <div class="wrapper">
+                  <p class="date">2013/12/6</p>
+
+
+                </div>
+                <!--/wrapper-->
+              </div>
+              <div class="article-body styled">
+                <div class="nm0704_fig_area">
+                  <div class="nm0704_fig">
+                    <div class="nm0704_fig_img" style="width: 40px;">
+                      <a href="/" target="_blank"> <img src="/user/images/thumb_533314_s1061_20131029_1_s.jpg" width="40" height="47" title="画像" border="0" />
+                      </a>
+                      <p class="nm0704_caption">キャプション</p>
+                    </div>
+                  </div>
+                  <p>拡大画像</p>
+                </div>
+                <!-- /article-body -->
+                <div class="article-footer">
+                  <div class="article-pagination">
+                    <!--/next-subheading-->
+                    <div class="pagination">
+                      <a href="#" title="前のページへ" class="previous disable"> <span>前のページへ</span>
+                      </a> <a href="#" title="次のページへ" class="next disable"> <span>次のページへ</span>
+                      </a>
+                      <ul class="nav">
+                        <li class="current"><a href="" title="1">1</a></li>
+                      </ul>
+                    </div>
+                    <!--/pagination-->
+                  </div>
+                  <!--/article-pagination-->
+                  <div class="tools">
+                    <!--/wrapper-->
+                    <div class="wrapper other">
+                      <a href="javascript:void(0)" onclick="toolPrint(); return false;" title="この記事を印刷する" class="button icon print"><span>
+                          <img src="/images/nm1311/bg/spacer.gif" alt="この記事を印刷する" width="21" height="21" />
+                        </span></a>
+                      <script src="http://static.evernote.com/noteit.js" type="text/javascript"></script>
+                      <a href="#" onclick="Evernote.doClip({}); return false;" title="この記事をEvernoteに送信する" class="button icon evernote"><span>
+                          <img src="/images/nm1311/bg/spacer.gif" alt="この記事をEvernoteに送信する" width="21" height="21" />
+                        </span></a> <a href="javascript:void(0)"
+                        onclick="window.open('http://b.hatena.ne.jp/add?mode=confirm&url=' + encodeURIComponent('http://medical.nikkeibp.co.jp/leaf/all/series/maintenance/201312/533314.html') + '&title=' + encodeURIComponent('テスト 宮内 拡大画像チェック'));return false;"
+                        title="この記事をはてなブックマークに登録する" class="icon left"><img src="/images/nm1311/icon/hatena.png" alt="この記事をはてなブックマークに登録する" width="25"
+                        height="25" /></a> <a href="javascript:void(0)"
+                        onclick="window.open('http://www.google.com/bookmarks/mark?op=add&bkmk=' + encodeURIComponent('http://medical.nikkeibp.co.jp/leaf/all/series/maintenance/201312/533314.html') + '&title=' + encodeURIComponent('テスト 宮内 拡大画像チェック'));return false;"
+                        title="この記事をGoogle ブックマークに登録する" class="button icon google"><span>
+                          <img src="/images/nm1311/bg/spacer.gif" alt="この記事をGoogle ブックマークに登録する" width="21" height="21" />
+                        </span></a> <a href="mailto:" title="この記事を友達に知らせる" id="popup-mail" onclick="toolMail();" class="button icon mail"><span>
+                          <img src="/images/nm1311/bg/spacer.gif" alt="この記事を友達に知らせる" width="21" height="21" />
+                        </span></a> <a id="toolbtn_medpeer_btm" href="javascript:void(0)" onclick="nmoClubPost();" title="この記事についてコミュニティで話す" class="button icon medpeer"
+                        style="display: none;"><span>
+                          <img src="/images/nm1311/bg/spacer.gif" alt="この記事についてコミュニティで話す" width="21" height="21" />
+                        </span></a>
+                    </div>
+                    <!--/wrapper-->
+                  </div>
+                  <!--/tools-->
+                  <div class="keywords"></div>
+                </div>
+              </div>
+              <!--/article-->
+            </div>
+            <!-- /ARTICLE -->
+            <!-- end -->
+            <hr size="1" noshade>
+              <b>抄録データのプレビュー</b>:
+              <form name="summary">
+                <textarea name="summ" rows="8" cols="85" readonly>拡大画像</textarea>
+              </form>
+
+              <hr size="1" noshade>
+                <form action="/new_page/input_form" method="post">
+                  <div id="button">
+                    <input type="submit" value="仮登録を行う" name="do_stage">
+                  </div>
+                </form>
+                <form action="/new_page/input_form" method="post">
+                  <div id="button">
+                    <input type="submit" value="修正する" name="do_correct">
+                  </div>
+                </form>
+          </div>
+          <div id="footer">日経BP社 Copyright(C) 2006 Nikkei Business Publications. Inc, All Rights Reserved.</div>
+      </div>
+</body>
+</html>

@@ -11,6 +11,7 @@ import java.util.List;
 import jp.co.myms.generate.core.exception.GeneratorException;
 import jp.co.myms.generate.core.mock.MockTemplateInfoCreater;
 import jp.co.myms.generate.core.module.BaseGeneratorModule;
+import jp.co.myms.generate.core.module.StringGeneratorModule;
 import jp.co.myms.generate.core.param.GeneratorParameter;
 import jp.co.myms.generate.core.param.StringGeneratorParameter;
 import jp.co.myms.generate.core.task.GeneratorTaskMonitor;
@@ -57,8 +58,8 @@ public class GeneratorImplTest {
 
 	@Test
 	public void test() throws IOException {
-		BaseGeneratorModule<String> module = new BaseGeneratorModule(new MockTemplateInfoCreater());
-		Generator<String> generator = GeneratorFactory.createGenerator(module);
+		StringGeneratorModule module = new StringGeneratorModule(new MockTemplateInfoCreater());
+		StringGenerator generator = GeneratorFactory.createGenerator(StringGenerator.class, module);
 		StringGeneratorParameter parameter = new StringGeneratorParameter();
 		parameter.setOutputDirectory("output");
 		parameter.setTemplateDirectory("template");
@@ -76,8 +77,8 @@ public class GeneratorImplTest {
 	@Test
 	public void testTemplateDirIsFileSystem() throws IOException {
 
-		BaseGeneratorModule<String> module = new BaseGeneratorModule(new MockTemplateInfoCreater());
-		Generator<String> generator = GeneratorFactory.createGenerator(module);
+		StringGeneratorModule module = new StringGeneratorModule(new MockTemplateInfoCreater());
+		StringGenerator generator = GeneratorFactory.createGenerator(StringGenerator.class, module);
 		StringGeneratorParameter parameter = new StringGeneratorParameter();
 		parameter.setOutputDirectory("output");
 		parameter.setTemplateDirectory("src/test/resources/template");
@@ -95,8 +96,8 @@ public class GeneratorImplTest {
 	@Test
 	public void testNoOutputDir() throws IOException {
 
-		BaseGeneratorModule<String> module = new BaseGeneratorModule(new MockTemplateInfoCreater());
-		Generator<String> generator = GeneratorFactory.createGenerator(module);
+		StringGeneratorModule module = new StringGeneratorModule(new MockTemplateInfoCreater());
+		StringGenerator generator = GeneratorFactory.createGenerator(StringGenerator.class, module);
 		StringGeneratorParameter parameter = new StringGeneratorParameter();
 		parameter.setTemplateDirectory("template");
 		parameter.setTemplateParameter("テストテストテストテストテスト");
@@ -108,8 +109,8 @@ public class GeneratorImplTest {
 	@Test
 	public void testNoTemplateDir() throws IOException {
 
-		BaseGeneratorModule<String> module = new BaseGeneratorModule(new MockTemplateInfoCreater());
-		Generator<String> generator = GeneratorFactory.createGenerator(module);
+		StringGeneratorModule module = new StringGeneratorModule(new MockTemplateInfoCreater());
+		StringGenerator generator = GeneratorFactory.createGenerator(StringGenerator.class, module);
 		StringGeneratorParameter parameter = new StringGeneratorParameter();
 		parameter.setOutputDirectory("output");
 		parameter.setTemplateParameter("テストテストテストテストテスト");
@@ -120,8 +121,8 @@ public class GeneratorImplTest {
 
 	@Test
 	public void testNoTExistOutputDir() throws IOException {
-		BaseGeneratorModule<String> module = new BaseGeneratorModule(new MockTemplateInfoCreater());
-		Generator<String> generator = GeneratorFactory.createGenerator(module);
+		StringGeneratorModule module = new StringGeneratorModule(new MockTemplateInfoCreater());
+		StringGenerator generator = GeneratorFactory.createGenerator(StringGenerator.class, module);
 		StringGeneratorParameter parameter = new StringGeneratorParameter();
 		parameter.setOutputDirectory("notexist");
 		parameter.setTemplateDirectory("template");
@@ -133,8 +134,8 @@ public class GeneratorImplTest {
 
 	@Test
 	public void testNoTExistTemplateDir() throws IOException {
-		BaseGeneratorModule<String> module = new BaseGeneratorModule(new MockTemplateInfoCreater());
-		Generator<String> generator = GeneratorFactory.createGenerator(module);
+		StringGeneratorModule module = new StringGeneratorModule(new MockTemplateInfoCreater());
+		StringGenerator generator = GeneratorFactory.createGenerator(StringGenerator.class, module);
 		StringGeneratorParameter parameter = new StringGeneratorParameter();
 		parameter.setOutputDirectory("output");
 		parameter.setTemplateDirectory("notexist");
@@ -146,9 +147,9 @@ public class GeneratorImplTest {
 
 	@Test
 	public void testGeneratorException(final @Mocked GeneratorTaskMonitor generatorTaskMonitor) throws IOException {
-		BaseGeneratorModule<String> module = new BaseGeneratorModule(new MockTemplateInfoCreater());
+		StringGeneratorModule module = new StringGeneratorModule(new MockTemplateInfoCreater());
 		module.setGeneratorTaskMonitor(generatorTaskMonitor);
-		Generator<String> generator = GeneratorFactory.createGenerator(module);
+		StringGenerator generator = GeneratorFactory.createGenerator(StringGenerator.class, module);
 
 		new NonStrictExpectations() {
 
@@ -166,69 +167,6 @@ public class GeneratorImplTest {
 		assertThat(status.isError(), is(true));
 		assertThat(status.getErrorMessages().length > 0, is(true));
 		assertThat(status.getErrorMessages()[0], is("例外発生"));
-	}
-
-	@Test
-	public void type() throws Exception {
-		// TODO auto-generated by JUnit Helper.
-		assertThat(GeneratorImpl.class, notNullValue());
-	}
-
-	@Test
-	public void instantiation() throws Exception {
-		// TODO auto-generated by JUnit Helper.
-		BaseGeneratorModule<Object> module = null;
-		GeneratorImpl target = new GeneratorImpl(module);
-		assertThat(target, notNullValue());
-	}
-
-	@Test
-	public void generate_A$GeneratorParameter() throws Exception {
-		// TODO auto-generated by JUnit Helper.
-		BaseGeneratorModule<Object> module = null;
-		GeneratorImpl target = new GeneratorImpl(module);
-		GeneratorParameter<Object> parameter = null;
-		GeneratorStatus actual = target.generate(parameter);
-		GeneratorStatus expected = null;
-		assertThat(actual, is(equalTo(expected)));
-	}
-
-	@Test
-	public void generate_A_GeneratorParameter() throws Exception {
-		// TODO JUnit Helper による自動生成
-		// Arrange
-		BaseGeneratorModule<Object> module = null;
-		GeneratorImpl target = new GeneratorImpl(module);
-		GeneratorParameter<Object> parameter = null;
-		new Expectations() {
-			{
-				// 例 : mocked.get(anyString); returns(200);
-			}
-		};
-		// Act
-		GeneratorStatus actual = target.generate(parameter);
-		// Assert
-		GeneratorStatus expected = null;
-		assertThat(actual, is(equalTo(expected)));
-	}
-
-	@Test
-	public void generate_Arg_GeneratorParameter() throws Exception {
-		// TODO JUnit Helper による自動生成
-		// Arrange
-		BaseGeneratorModule<Object> module = null;
-		GeneratorImpl target = new GeneratorImpl(module);
-		GeneratorParameter<Object> parameter = null;
-		new Expectations() {
-			{
-				// 例 : mocked.get(anyString); returns(200);
-			}
-		};
-		// Act
-		GeneratorStatus actual = target.generate(parameter);
-		// Assert
-		GeneratorStatus expected = null;
-		assertThat(actual, is(equalTo(expected)));
 	}
 
 }

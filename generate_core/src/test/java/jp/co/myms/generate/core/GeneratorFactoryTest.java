@@ -24,9 +24,9 @@ public class GeneratorFactoryTest {
 		// Arrange
 		BaseGeneratorModule<String> module = new BaseGeneratorModule(new MockTemplateInfoCreater());
 		// Act
-		Generator<String> actual = GeneratorFactory.createGenerator(module);
+		StringGenerator actual = GeneratorFactory.createGenerator(StringGenerator.class, module);
 		// Assert
-		assertThat(actual, instanceOf(GeneratorImpl.class));
+		assertThat(actual, instanceOf(StringGenerator.class));
 	}
 
 	@Test
@@ -34,7 +34,7 @@ public class GeneratorFactoryTest {
 		// Arrange
 		BaseGeneratorModule<Object> module = null;
 		// Act
-		GeneratorFactory.createGenerator(module);
+		GeneratorFactory.createGenerator(StringGenerator.class, module);
 		// Assert
 		thrown.expect(NullPointerException.class);
 		thrown.expectMessage("ジェネレータモジュールはnullを引数にできません.");
