@@ -60,21 +60,5 @@ public class SimpleNameComputerTest {
 	@Mocked 
 	ResourceWrapper computeOutputFileNames_Arg_ResourceWrapper_GeneratorParameter_templateFile;
 
-	@Test
-	public void computeOutputFileNames_Arg_ResourceWrapper_GeneratorParameter() throws Exception {
-		// TODO JUnit Helper による自動生成
-		// Arrange
-		SimpleNameComputer target = new SimpleNameComputer();
-		ResourceWrapper templateFile = this.computeOutputFileNames_Arg_ResourceWrapper_GeneratorParameter_templateFile;
-		GeneratorParameter<Object> parameter = null;
-		new Expectations(){{
-			// 例 : mocked.get(anyString); returns(200);
-		}};
-		// Act
-		String actual = target.computeOutputFileNames(templateFile, parameter);
-		// Assert
-		String expected = null;
-		assertThat(actual, is(equalTo(expected)));
-	}
 
 }

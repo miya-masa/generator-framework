@@ -53,19 +53,6 @@ public class LogTaskMonitorTest {
 		// Assert
 	}
 
-	@Test
-	public void work_Arg_int() throws Exception {
-		// TODO JUnit Helper による自動生成
-		// Arrange
-		LogTaskMonitor target = new LogTaskMonitor();
-		int work = 0;
-		new Expectations(){{
-			// 例 : mocked.get(anyString); returns(200);
-		}};
-		// Act
-		target.work(work);
-		// Assert
-	}
 
 	@Test
 	public void end_Arg_String() throws Exception {

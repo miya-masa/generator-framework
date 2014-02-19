@@ -27,22 +27,6 @@ public class BaseGeneratorValidatorTest {
 		assertThat(target, notNullValue());
 	}
 
-	@Test
-	public void validate_Arg_GeneratorParameter_List() throws Exception {
-		// TODO JUnit Helper による自動生成
-		// Arrange
-		BaseGeneratorValidator target = new BaseGeneratorValidator();
-		GeneratorParameter<Object> parameter = null;
-		List<String> errorMessageList = new ArrayList<String>();
-		new Expectations(){{
-			// 例 : mocked.get(anyString); returns(200);
-		}};
-		// Act
-		boolean actual = target.validate(parameter, errorMessageList);
-		// Assert
-		boolean expected = false;
-		assertThat(actual, is(equalTo(expected)));
-	}
 
 	@Test
 	public void checkRequired_Arg_String_List_String() throws Exception {
@@ -95,23 +79,5 @@ public class BaseGeneratorValidatorTest {
 		// Assert
 	}
 
-	@Test
-	public void checkExistFile_Arg_String_List_String_boolean() throws Exception {
-		// TODO JUnit Helper による自動生成
-		// Arrange
-		BaseGeneratorValidator target = new BaseGeneratorValidator();
-		String filePath = null;
-		List<String> errorMessageList = new ArrayList<String>();
-		String errorMessage = null;
-		boolean checkClassPath = false;
-		new Expectations(){{
-			// 例 : mocked.get(anyString); returns(200);
-		}};
-		// Act
-		boolean actual = target.checkExistFile(filePath, errorMessageList, errorMessage, checkClassPath);
-		// Assert
-		boolean expected = false;
-		assertThat(actual, is(equalTo(expected)));
-	}
 
 }

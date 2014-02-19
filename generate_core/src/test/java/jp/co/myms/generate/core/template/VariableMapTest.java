@@ -41,19 +41,5 @@ public class VariableMapTest {
 		// Assert
 	}
 
-	@Test
-	public void entrySet_Arg_() throws Exception {
-		// TODO JUnit Helper による自動生成
-		// Arrange
-		VariableMap target = new VariableMap();
-		new Expectations(){{
-			// 例 : mocked.get(anyString); returns(200);
-		}};
-		// Act
-		Set actual = target.entrySet();
-		// Assert
-		Set expected = null;
-		assertThat(actual, is(equalTo(expected)));
-	}
 
 }

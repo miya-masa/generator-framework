@@ -27,21 +27,6 @@ public class GeneratorModuleTest {
 		assertThat(target, notNullValue());
 	}
 
-	@Test
-	public void getNameComputer_Arg_() throws Exception {
-		// TODO JUnit Helper による自動生成
-		// Arrange
-		TemplateInfoCreater<Object> templateInfoCreater = null;
-		BaseGeneratorModule target = new BaseGeneratorModule(templateInfoCreater);
-		new Expectations(){{
-			// 例 : mocked.get(anyString); returns(200);
-		}};
-		// Act
-		NameComputer<Object> actual = target.getNameComputer();
-		// Assert
-		NameComputer<Object> expected = null;
-		assertThat(actual, is(equalTo(expected)));
-	}
 
 	@Test
 	public void setNameComputer_Arg_NameComputer() throws Exception {
@@ -74,21 +59,6 @@ public class GeneratorModuleTest {
 		assertThat(actual, is(equalTo(expected)));
 	}
 
-	@Test
-	public void getGeneratorParameterValidator_Arg_() throws Exception {
-		// TODO JUnit Helper による自動生成
-		// Arrange
-		TemplateInfoCreater<Object> templateInfoCreater = null;
-		BaseGeneratorModule target = new BaseGeneratorModule(templateInfoCreater);
-		new Expectations(){{
-			// 例 : mocked.get(anyString); returns(200);
-		}};
-		// Act
-		GeneratorParameterValidator<Object> actual = target.getGeneratorParameterValidator();
-		// Assert
-		GeneratorParameterValidator<Object> expected = null;
-		assertThat(actual, is(equalTo(expected)));
-	}
 
 	@Test
 	public void setGeneratorParameterValidator_Arg_GeneratorParameterValidator() throws Exception {

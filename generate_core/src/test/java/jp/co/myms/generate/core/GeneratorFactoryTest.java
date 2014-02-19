@@ -4,6 +4,7 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 import jp.co.myms.generate.core.mock.MockTemplateInfoCreater;
 import jp.co.myms.generate.core.module.BaseGeneratorModule;
+import jp.co.myms.generate.core.module.StringGeneratorModule;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -22,22 +23,19 @@ public class GeneratorFactoryTest {
 	@Test
 	public void createGenerator_Arg_GeneratorModule() throws Exception {
 		// Arrange
-		BaseGeneratorModule<String> module = new BaseGeneratorModule(new MockTemplateInfoCreater());
+		StringGeneratorModule module = new StringGeneratorModule(new MockTemplateInfoCreater());
 		// Act
 		StringGenerator actual = GeneratorFactory.createGenerator(StringGenerator.class, module);
 		// Assert
 		assertThat(actual, instanceOf(StringGenerator.class));
 	}
 
-	@Test
+	@Test(expected = NullPointerException.class)
 	public void createGenerator_Arg_GeneratorModule_nullArg() throws Exception {
 		// Arrange
-		BaseGeneratorModule<Object> module = null;
+		StringGeneratorModule module = null;
 		// Act
 		GeneratorFactory.createGenerator(StringGenerator.class, module);
-		// Assert
-		thrown.expect(NullPointerException.class);
-		thrown.expectMessage("ジェネレータモジュールはnullを引数にできません.");
 	}
 
 }

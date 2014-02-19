@@ -1,5 +1,8 @@
 package jp.co.myms.generate.core;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -13,6 +16,7 @@ import jp.co.myms.generate.core.param.GeneratorParameter;
 import jp.co.myms.generate.core.resource.ResourceFactory;
 import jp.co.myms.generate.core.resource.ResourceWrapper;
 import jp.co.myms.generate.core.resource.ResourcesUtils;
+import jp.co.myms.generate.core.resource.filesystem.TmpFileManeger;
 import jp.co.myms.generate.core.task.GeneratorTaskMonitor;
 import jp.co.myms.generate.core.template.TemplateInfoCreater;
 import jp.co.myms.generate.core.template.VariableMap;
@@ -119,10 +123,20 @@ public abstract class AbstractGenerator<T extends GeneratorParameter<I>, I> impl
 				ResourceWrapper outputFile = factory.createResource(outputDir,
 						nameComputer.computeOutputFileNames(file, parameter));
 				status.addInfoMessage(LOGGER, "出力ファイル" + outputFile.getPath());
-				helper.merge(templateDirPath + "/" + file.getName(), outputFile);
+				LOGGER.info("######################"
+						+ Paths.get(".").toAbsolutePath().relativize(Paths.get(file.getPath()).toAbsolutePath())
+								.toAbsolutePath()
+								.toString());
+				LOGGER.info("######################" + Paths.get(".").toAbsolutePath().toString());
+				helper.merge(
+						Paths.get("").toAbsolutePath().relativize(Paths.get(file.getPath()).toAbsolutePath())
+								.toAbsolutePath()
+								.toString()
+								.replace(Paths.get("").toAbsolutePath().toString(), ""),
+						outputFile);
 				generatorTaskMonitor.work(taskAtFile);
 			}
-
+			TmpFileManeger.cleanTmpDirectoryRecursive();
 		} catch (GeneratorException e) {
 			LOGGER.error("ジェネレータ実行中にエラーが発生しました.", e);
 			status.addErrorMessages(LOGGER, e.getMessage());

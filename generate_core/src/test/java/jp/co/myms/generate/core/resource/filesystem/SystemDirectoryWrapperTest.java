@@ -21,45 +21,6 @@ public class SystemDirectoryWrapperTest {
 		assertThat(SystemDirectoryWrapper.class, notNullValue());
 	}
 
-	@Test
-	public void instantiation() throws Exception {
-		// TODO JUnit Helper による自動生成
-		File file = null;
-		SystemDirectoryWrapper target = new SystemDirectoryWrapper(file);
-		assertThat(target, notNullValue());
-	}
 
-	@Test
-	public void isFile_Arg_() throws Exception {
-		// TODO JUnit Helper による自動生成
-		// Arrange
-		File file = null;
-		SystemDirectoryWrapper target = new SystemDirectoryWrapper(file);
-		new Expectations(){{
-			// 例 : mocked.get(anyString); returns(200);
-		}};
-		// Act
-		boolean actual = target.isFile();
-		// Assert
-		boolean expected = false;
-		assertThat(actual, is(equalTo(expected)));
-	}
-
-	@Test
-	public void listFiles_Arg_boolean() throws Exception {
-		// TODO JUnit Helper による自動生成
-		// Arrange
-		File file = null;
-		SystemDirectoryWrapper target = new SystemDirectoryWrapper(file);
-		boolean recursive = false;
-		new Expectations(){{
-			// 例 : mocked.get(anyString); returns(200);
-		}};
-		// Act
-		FileWrapper[] actual = target.listFiles(recursive);
-		// Assert
-		FileWrapper[] expected = null;
-		assertThat(actual, is(equalTo(expected)));
-	}
 
 }
